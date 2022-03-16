@@ -5,12 +5,53 @@ import _ from "lodash";
 import {v4} from "uuid";
 
 
+const item1 = {
+  id: v4(),
+  name: "Anand"
+}
+const item2 = {
+  id: v4(),
+  name: "Sathish"  
+}
+const item3 = {
+  id: v4(),
+  name: "Midun"  
+}
+const item4 = {
+  id: v4(),
+  name: "Gokul"  
+}
+const item5 = {
+  id: v4(),
+  name: "Jeeva"  
+}
+const item6 = {
+  id: v4(),
+  name: "Vasanth"  
+}
+const item7 = {
+  id: v4(),
+  name: "Sanjith"  
+}
+const item8 = {
+  id: v4(),
+  name: "Krishna" 
+}
+const item9 = {
+  id: v4(),
+  name: "Sakthi"  
+}
+const item10 = {
+  id: v4(),
+  name: "Ganesh" 
+}
+
 function App() {
-  const [text, setText] = useState("")
+
   const [state, setState] = useState({
     "Applied": {
       title: "Applied",
-      items: []
+      items: [item1, item2, item3, item4, item5, item6, item7, item8, item9, item10]
     },
     "Assessment": {
       title: "Assessment",
@@ -35,48 +76,25 @@ function App() {
       return
     }
 
-    // Creating a copy of item before removing it from state
+    
     const itemCopy = {...state[source.droppableId].items[source.index]}
 
     setState(prev => {
       prev = {...prev}
-      // Remove from previous items array
+      
       prev[source.droppableId].items.splice(source.index, 1)
 
 
-      // Adding to new items array location
+     
       prev[destination.droppableId].items.splice(destination.index, 0, itemCopy)
 
       return prev
     })
   }
 
-  const addItem = () => {
-    setState(prev => {
-      return {
-        ...prev,
-        Applied: {
-          title: "Applied",
-          items: [
-            {
-              id: v4(),
-              name: text
-            },
-            ...prev.Applied.items
-          ]
-        }
-      }
-    })
-
-    setText("")
-  }
 
   return (
     <div className="App">
-      <div className='table'>
-        <input type="text" value={text} onChange={(e) => setText(e.target.value)}/>
-        <button className='button' onClick={addItem}>+</button>
-      </div>
       <DragDropContext onDragEnd={handleDragEnd}>
         {_.map(state, (data, key) => {
           return(
